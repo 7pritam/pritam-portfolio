@@ -7,15 +7,15 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;800&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;800&family=Space+Grotesk:wght@400;600&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         /* --- 1. CORE VARIABLES & RESET --- */
         :root {
-            --bg-dark: #0f172a;       /* Deep Slate */
-            --bg-card: #1e293b;       /* Lighter Slate */
-            --accent-primary: #38bdf8; /* Cyan */
-            --accent-secondary: #818cf8; /* Indigo */
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent-primary: #38bdf8;
+            --accent-secondary: #818cf8;
             --text-main: #f1f5f9;
             --text-muted: #94a3b8;
             --gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
@@ -26,7 +26,7 @@
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Outfit', 'Noto Sans', sans-serif; /* Added Noto Sans for Hindi support */
             line-height: 1.6;
             overflow-x: hidden;
         }
@@ -35,27 +35,20 @@
         ul { list-style: none; }
 
         /* --- 2. LAYOUT & UTILITIES --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
         section { padding: 100px 0; }
-
         .gradient-text {
             background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
         }
-        
         h2 { font-size: 2.5rem; margin-bottom: 20px; }
 
         /* --- 3. GLASS NAVIGATION --- */
         nav {
             position: fixed; top: 0; width: 100%; padding: 20px 0;
-            background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px);
+            background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(12px);
             z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
@@ -64,7 +57,28 @@
         .nav-links { display: flex; gap: 30px; }
         .nav-links a { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; }
         .nav-links a:hover { color: var(--accent-primary); }
-        .nav-btn { padding: 8px 20px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50px; color: white; }
+
+        /* Language Toggle Button Style */
+        .lang-toggle {
+            padding: 8px 15px;
+            border: 1px solid var(--accent-primary);
+            border-radius: 50px;
+            color: var(--accent-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: transparent;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-right: 15px;
+        }
+        .lang-toggle:hover {
+            background: rgba(56, 189, 248, 0.15);
+            color: white;
+        }
+        
+        .nav-btn {
+            padding: 8px 20px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50px; color: white;
+        }
         .nav-btn:hover { border-color: var(--accent-primary); background: rgba(56, 189, 248, 0.1); }
 
         /* --- 4. HERO SECTION --- */
@@ -78,7 +92,7 @@
         .btn-secondary { background: rgba(255,255,255,0.05); color: white; padding: 14px 36px; border-radius: 50px; font-weight: 600; }
         .btn-secondary:hover { background: rgba(255,255,255,0.1); }
 
-        /* --- 5. BENTO GRID (ABOUT & SKILLS) --- */
+        /* --- 5. BENTO GRID --- */
         .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, auto); gap: 20px; }
         .bento-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 30px; position: relative; overflow: hidden; transition: transform 0.3s ease; }
         .bento-card:hover { transform: translateY(-5px); border-color: rgba(56, 189, 248, 0.3); }
@@ -93,7 +107,20 @@
         .skill-pill { background: rgba(255,255,255,0.05); padding: 8px 16px; border-radius: 8px; font-size: 0.9rem; border: 1px solid transparent; transition: 0.3s; }
         .skill-pill:hover { border-color: var(--accent-primary); color: var(--accent-primary); background: rgba(56, 189, 248, 0.05); }
 
-        /* --- 6. PROJECTS (with stylish hover effect) --- */
+        /* --- 6. SERVICES SECTION --- */
+        .services-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .service-card {
+            background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px;
+            padding: 40px 30px; transition: transform 0.3s, border-color 0.3s; text-align: center;
+        }
+        .service-card:hover { transform: translateY(-5px); border-color: var(--accent-primary); }
+        .service-card h3 { font-size: 1.5rem; color: var(--accent-primary); margin-bottom: 15px; }
+        .service-card .icon {
+            font-size: 3rem; margin-bottom: 20px; background: var(--gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        /* --- 7. PROJECTS --- */
         .projects-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 40px; }
         .project-card {
             background: var(--bg-card); border-radius: 20px; padding: 40px 30px;
@@ -109,71 +136,12 @@
         .project-link { display: inline-block; margin-top: 15px; font-size: 0.9rem; font-weight: 600; color: var(--accent-primary); }
         .project-link:hover { color: #818cf8; }
 
-        /* --- 7. SERVICES SECTION (NEW) --- */
-        .services-wrapper {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        .service-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 20px;
-            padding: 40px 30px;
-            transition: transform 0.3s, border-color 0.3s;
-            text-align: center;
-        }
-        .service-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-primary);
-        }
-        .service-card h3 {
-            font-size: 1.5rem;
-            color: var(--accent-primary);
-            margin-bottom: 15px;
-        }
-        .service-card .icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-
         /* --- 8. CERTIFICATES SECTION --- */
-        .cert-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            text-align: center;
-        }
-
-        .cert-card {
-            background: var(--bg-dark);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 12px;
-            padding: 25px;
-            transition: background 0.3s, border-color 0.3s;
-        }
-
-        .cert-card:hover {
-            background: #233045;
-            border-color: var(--accent-secondary);
-        }
-
-        .cert-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 5px;
-            color: var(--accent-primary);
-        }
-
-        .cert-card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
+        .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; text-align: center; }
+        .cert-card { background: var(--bg-dark); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 25px; transition: background 0.3s, border-color 0.3s; }
+        .cert-card:hover { background: #233045; border-color: var(--accent-secondary); }
+        .cert-card h3 { font-size: 1.25rem; margin-bottom: 5px; color: var(--accent-primary); }
+        .cert-card p { color: var(--text-muted); font-size: 0.9rem; }
 
         /* --- 9. CONTACT / FOOTER --- */
         .contact-section { text-align: center; background: linear-gradient(180deg, var(--bg-dark) 0%, #172033 100%); }
@@ -183,7 +151,7 @@
             font-size: 1.1rem; margin: 10px; color: var(--text-main);
         }
         .contact-btn:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
-
+        
         /* --- MOBILE --- */
         @media (max-width: 768px) {
             .hero h1 { font-size: 3rem; }
@@ -198,23 +166,26 @@
     <nav>
         <div class="container nav-inner">
             <div class="logo">Pritam<span style="color:var(--accent-primary)">.</span></div>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#stack">Stack</a>
-                <a href="#services">Services</a>
-                <a href="#projects">Work</a>
-                <a href="#certificates">Certificates</a>
+            <div style="display: flex; align-items: center;">
+                <button id="lang-toggle" class="lang-toggle" onclick="toggleLanguage()">हिन्दी / English</button>
+                <div class="nav-links">
+                    <a href="#about" data-en="About" data-hi="परिचय">About</a>
+                    <a href="#stack" data-en="Stack" data-hi="तकनीकी">Stack</a>
+                    <a href="#services" data-en="Services" data-hi="सेवाएं">Services</a>
+                    <a href="#projects" data-en="Work" data-hi="कार्य">Work</a>
+                    <a href="#certificates" data-en="Certificates" data-hi="प्रमाण पत्र">Certificates</a>
+                </div>
+                <a href="mailto:pritamtandan@gmail.com" class="nav-btn" data-en="Hire Me" data-hi="हायर करें">Hire Me</a>
             </div>
-            <a href="mailto:pritamtandan@gmail.com" class="nav-btn">Hire Me</a>
         </div>
     </nav>
 
     <section class="hero">
         <div class="container">
-            <h1 class="fade-in">Hi, I'm <span class="gradient-text">Pritam Kumar</span></h1>
-            <p>Senior Full-Stack Developer with 7+ years of expertise in the MEAN stack. I build scalable, high-performance digital solutions for government and enterprise clients.</p>
+            <h1 class="fade-in"><span data-id="hero_greeting">Hi, I'm</span> <span class="gradient-text">Pritam Kumar</span></h1>
+            <p data-id="hero_summary">Senior Full-Stack Developer with 7+ years of expertise in the MEAN stack. I build scalable, high-performance digital solutions for government and enterprise clients.</p>
             <div class="hero-btns">
-                <a href="#services" class="btn-primary">View Services</a>
+                <a href="#services" class="btn-primary" data-en="View Services" data-hi="सेवाएं देखें">View Services</a>
                 <a href="https://in.linkedin.com/in/pritam-kumar-853b61120" target="_blank" class="btn-secondary">LinkedIn Profile</a>
             </div>
         </div>
@@ -225,12 +196,12 @@
             <div class="bento-grid">
                 
                 <div class="bento-card card-bio">
-                    <span class="bento-title">About Me</span>
-                    <h2 style="font-size: 1.8rem; margin-bottom: 15px;">Engineering Robust Web Solutions</h2>
-                    <p style="color: var(--text-muted);">
+                    <span class="bento-title" data-en="About Me" data-hi="मेरे बारे में">About Me</span>
+                    <h2 style="font-size: 1.8rem; margin-bottom: 15px;" data-id="bio_title">Engineering Robust Web Solutions</h2>
+                    <p style="color: var(--text-muted);" data-id="bio_p1">
                         I am a Senior Software Engineer specializing in Angular, Node.js, and MySQL. I focus on developing and deploying scalable web applications. My experience spans government, healthcare, and e-commerce domains, emphasizing clean, efficient code and performance optimization.
                     </p>
-                    <p style="color: var(--text-muted); margin-top: 15px;">
+                    <p style="color: var(--text-muted); margin-top: 15px;" data-id="bio_p2">
                         I have delivered over 10 public-facing government and enterprise applications, ensuring smooth system operations and seamless integrations.
                     </p>
                 </div>
@@ -238,16 +209,16 @@
                 <div class="bento-card card-stats">
                     <div class="stat-item">
                         <div class="stat-num">7+</div>
-                        <div class="stat-label">Years Experience</div>
+                        <div class="stat-label" data-en="Years Experience" data-hi="वर्षों का अनुभव">Years Experience</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-num">10+</div>
-                        <div class="stat-label">Live Projects</div>
+                        <div class="stat-label" data-en="Live Projects" data-hi="लाइव परियोजनाएं">Live Projects</div>
                     </div>
                 </div>
 
                 <div class="bento-card card-skills" id="stack">
-                    <span class="bento-title">Full Technical Stack & Integrations</span>
+                    <span class="bento-title" data-en="Full Technical Stack & Integrations" data-hi="संपूर्ण तकनीकी स्टैक और एकीकरण">Full Technical Stack & Integrations</span>
                     <div class="skill-list">
                         <span class="skill-pill">Angular</span>
                         <span class="skill-pill">Node.js</span>
@@ -255,9 +226,8 @@
                         <span class="skill-pill">.NET / PHP / ColdFusion</span>
                         <span class="skill-pill">React</span>
                         <span class="skill-pill">AWS (S3)</span>
-                        <span class="skill-pill">Heartland API (Payment)</span>
-                        <span class="skill-pill">FedEx API (Shipping)</span>
-                        <span class="skill-pill">Google / Facebook / Outlook API</span>
+                        <span class="skill-pill">Heartland API</span>
+                        <span class="skill-pill">FedEx API</span>
                     </div>
                 </div>
 
@@ -267,26 +237,26 @@
 
     <section id="services">
         <div class="container">
-            <h2>Services Offered</h2>
-            <p style="color: var(--text-muted); margin-bottom: 40px;">Leveraging 7+ years of experience to deliver comprehensive full-stack and specialized application development.</p>
+            <h2 data-id="services_heading">Services Offered</h2>
+            <p style="color: var(--text-muted); margin-bottom: 40px;" data-id="services_subheading">Leveraging 7+ years of experience to deliver comprehensive full-stack and specialized application development.</p>
             <div class="services-wrapper">
                 
                 <div class="service-card">
                     <div class="icon">💻</div>
-                    <h3>Web Development</h3>
-                    <p style="color: var(--text-muted);">End-to-end development of scalable web applications, RESTful APIs, and government portals using the MEAN Stack (Angular, Node.js, MySQL/MongoDB) and other frameworks like .NET/PHP.</p>
+                    <h3 data-id="service_web_title">Web Development</h3>
+                    <p style="color: var(--text-muted);" data-id="service_web_desc">End-to-end development of scalable web applications, RESTful APIs, and government portals using the MEAN Stack (Angular, Node.js, MySQL/MongoDB) and other frameworks like .NET/PHP.</p>
                 </div>
 
                 <div class="service-card">
                     <div class="icon">📱</div>
-                    <h3>Mobile Application Development</h3>
-                    <p style="color: var(--text-muted);">Development of cross-platform mobile solutions, focusing on modern frameworks like React Native (or similar tech) to build fast, responsive, and data-driven applications that integrate with existing APIs.</p>
+                    <h3 data-id="service_mobile_title">Mobile Application Development</h3>
+                    <p style="color: var(--text-muted);" data-id="service_mobile_desc">Development of cross-platform mobile solutions, focusing on modern frameworks like React Native (or similar tech) to build fast, responsive, and data-driven applications that integrate with existing APIs.</p>
                 </div>
 
                 <div class="service-card">
                     <div class="icon">⚙️</div>
-                    <h3>System Architecture & Optimization</h3>
-                    <p style="color: var(--text-muted);">Consultation on system architecture, database design (MySQL, MSSQL), performance tuning, and optimizing complex workflows to ensure high efficiency and transparency for enterprise systems.</p>
+                    <h3 data-id="service_arch_title">System Architecture & Optimization</h3>
+                    <p style="color: var(--text-muted);" data-id="service_arch_desc">Consultation on system architecture, database design (MySQL, MSSQL), performance tuning, and optimizing complex workflows to ensure high efficiency and transparency for enterprise systems.</p>
                 </div>
 
             </div>
@@ -295,35 +265,35 @@
 
     <section id="projects" style="background: var(--bg-card);">
         <div class="container">
-            <h2>Key Government & Enterprise Projects</h2>
+            <h2 data-id="projects_heading">Key Government & Enterprise Projects</h2>
             <div class="projects-wrapper">
 
                 <div class="project-card">
                     <div class="project-tech">Angular • Node.js • MySQL</div>
-                    <h3>CG Health, Ayush & NHM Portal Suite</h3>
-                    <p style="color: var(--text-muted)">Developed multiple public-facing government websites to provide citizens of Chhattisgarh with access to essential services, digital forms, and health information.</p>
-                    <a href="#" target="_blank" class="project-link">View CG Health Portal &rarr;</a>
+                    <h3 data-id="p1_title">CG Health, Ayush & NHM Portal Suite</h3>
+                    <p style="color: var(--text-muted)" data-id="p1_desc">Developed multiple public-facing government websites to provide citizens of Chhattisgarh with access to essential services, digital forms, and health information.</p>
+                    <a href="https://cghealth.nic.in/" target="_blank" class="project-link" data-en="View Project" data-hi="परियोजना देखें">View Project &rarr;</a>
                 </div>
 
                 <div class="project-card">
                     <div class="project-tech">Angular • Node.js • MySQL</div>
-                    <h3>TB Camp & MOPS (Disease Management)</h3>
-                    <p style="color: var(--text-muted)">Created software solutions for village-wise disease survey data storage (TB Camp) and online tracking/monitoring of post-mortem cases (MOPS) to improve public health analysis and transparency.</p>
-                    <a href="#" target="_blank" class="project-link">View TB Camp System &rarr;</a>
+                    <h3 data-id="p2_title">TB Camp & MOPS (Disease Management)</h3>
+                    <p style="color: var(--text-muted)" data-id="p2_desc">Created software solutions for village-wise disease survey data storage (TB Camp) and online tracking/monitoring of post-mortem cases (MOPS) to improve public health analysis and transparency.</p>
+                    <a href="https://govthealth.cg.gov.in/tbcamp" target="_blank" class="project-link" data-en="View Project" data-hi="परियोजना देखें">View Project &rarr;</a>
                 </div>
 
                 <div class="project-card">
                     <div class="project-tech">Angular • Node.js • MySQL</div>
-                    <h3>HMIS & E-Kalyani (Healthcare Solutions)</h3>
-                    <p style="color: var(--text-muted)">Designed HMIS for tracking OPD/IPD services in hospitals and developed the E-Kalyani website to manage approval and reporting for Comprehensive Abortion Care services.</p>
-                    <a href="#" target="_blank" class="project-link">View HMIS Portal &rarr;</a>
+                    <h3 data-id="p3_title">HMIS & E-Kalyani (Healthcare Solutions)</h3>
+                    <p style="color: var(--text-muted)" data-id="p3_desc">Designed HMIS for tracking OPD/IPD services in hospitals and developed the E-Kalyani website to manage approval and reporting for Comprehensive Abortion Care services.</p>
+                    <a href="https://govthealth.cg.gov.in/hmis/" target="_blank" class="project-link" data-en="View Project" data-hi="परियोजना देखें">View Project &rarr;</a>
                 </div>
 
                 <div class="project-card">
                     <div class="project-tech">Angular • PHP • ColdFusion • API Integration</div>
-                    <h3>WooduTrade & Classic Sparklers</h3>
-                    <p style="color: var(--text-muted)">Contributed to enterprise applications like WooduTrade (vendor registration module) and built Classic Sparklers (online accounting/billing system with extensive API integration: FedEx, Heartland, Google, etc.).</p>
-                    <a href="#" target="_blank" class="project-link">View WooduTrade Module &rarr;</a>
+                    <h3 data-id="p4_title">WooduTrade & Classic Sparklers</h3>
+                    <p style="color: var(--text-muted)" data-id="p4_desc">Contributed to enterprise applications like WooduTrade (vendor registration module) and built Classic Sparklers (online accounting/billing system with extensive API integration: FedEx, Heartland, Google, etc.).</p>
+                    <a href="https://www.trade.wooduchoose.com/" target="_blank" class="project-link" data-en="View Project" data-hi="परियोजना देखें">View Project &rarr;</a>
                 </div>
 
             </div>
@@ -332,39 +302,39 @@
 
     <section id="certificates">
         <div class="container">
-            <h2>Certifications</h2>
-            <p style="color: var(--text-muted); margin-bottom: 40px;">Verifiable expertise in core technologies and development methodologies.</p>
+            <h2 data-id="cert_heading">Certifications</h2>
+            <p style="color: var(--text-muted); margin-bottom: 40px;" data-id="cert_subheading">Verifiable expertise in core technologies and development methodologies.</p>
             <div class="cert-grid">
                 
                 <div class="cert-card">
-                    <h3>MEAN Stack Development</h3>
-                    <p>Training/Certification from [Placeholder Institute/Platform]</p>
+                    <h3 data-id="c1_title">MEAN Stack Development</h3>
+                    <p data-id="c1_desc">Training/Certification from [Placeholder Institute/Platform]</p>
                 </div>
                 
                 <div class="cert-card">
-                    <h3>AWS Cloud Practitioner</h3>
-                    <p>Certification/Training in Cloud Services</p>
+                    <h3 data-id="c2_title">AWS Cloud Practitioner</h3>
+                    <p data-id="c2_desc">Certification/Training in Cloud Services</p>
                 </div>
 
                 <div class="cert-card">
-                    <h3>Agile/Scrum Methodology</h3>
-                    <p>Training in Project Management Techniques</p>
+                    <h3 data-id="c3_title">Agile/Scrum Methodology</h3>
+                    <p data-id="c3_desc">Training in Project Management Techniques</p>
                 </div>
 
                 <div class="cert-card">
-                    <h3>JavaScript/TypeScript</h3>
-                    <p>Advanced Coding Skills Certificate</p>
+                    <h3 data-id="c4_title">JavaScript/TypeScript</h3>
+                    <p data-id="c4_desc">Advanced Coding Skills Certificate</p>
                 </div>
                 
             </div>
-            <p style="color: var(--text-muted); margin-top: 40px;">*Please replace the placeholder information above with the actual names, dates, and issuing bodies for your certificates.</p>
+            <p style="color: var(--text-muted); margin-top: 40px;" data-id="cert_note">*Please replace the placeholder information above with the actual names, dates, and issuing bodies for your certificates.</p>
         </div>
     </section>
 
     <section id="contact" class="contact-section">
         <div class="container">
-            <h2 style="font-size: 3rem; margin-bottom: 30px;">Ready to Start a Project?</h2>
-            <p style="color: var(--text-muted); margin-bottom: 40px;">I am open for Senior Full-Stack Developer opportunities and new consultancy projects.</p>
+            <h2 style="font-size: 3rem; margin-bottom: 30px;" data-id="contact_heading">Ready to Start a Project?</h2>
+            <p style="color: var(--text-muted); margin-bottom: 40px;" data-id="contact_subheading">I am open for Senior Full-Stack Developer opportunities and new consultancy projects.</p>
             
             <div style="display: flex; justify-content: center; flex-wrap: wrap;">
                 <a href="mailto:pritamtandan@gmail.com" class="contact-btn">
@@ -376,10 +346,126 @@
             </div>
             
             <footer style="margin-top: 80px; color: #475569; font-size: 0.9rem;">
-                &copy; 2025 Pritam Kumar. Built with clean code.
+                <span data-id="footer_text">&copy; 2025 Pritam Kumar. Built with clean code.</span>
             </footer>
         </div>
     </section>
+    
+    <script>
+        // --- 1. LANGUAGE DATA OBJECT ---
+        const languageData = {
+            hi: {
+                // Navigation/Buttons
+                'hero_greeting': 'नमस्ते, मैं',
+                'Hire Me': 'हायर करें',
+                'View Services': 'सेवाएं देखें',
+                'About': 'परिचय',
+                'Stack': 'तकनीकी',
+                'Services': 'सेवाएं',
+                'Work': 'कार्य',
+                'Certificates': 'प्रमाण पत्र',
+                'Years Experience': 'वर्षों का अनुभव',
+                'Live Projects': 'लाइव परियोजनाएं',
+                'View Project': 'परियोजना देखें',
+
+                // Hero/Summary
+                'hero_summary': 'MEAN स्टैक में 7+ वर्षों की विशेषज्ञता वाला सीनियर फुल-स्टैक डेवलपर। मैं सरकारी और एंटरप्राइज़ ग्राहकों के लिए स्केलेबल, उच्च-प्रदर्शन वाले डिजिटल समाधान बनाता हूँ।',
+
+                // About
+                'About Me': 'मेरे बारे में',
+                'bio_title': 'मज़बूत वेब समाधानों का इंजीनियरिंग',
+                'bio_p1': 'मैं एंगुलर, Node.js, और MySQL में विशेषज्ञता वाला एक सीनियर सॉफ्टवेयर इंजीनियर हूँ। मैं स्केलेबल वेब एप्लिकेशन विकसित करने और तैनात करने पर ध्यान केंद्रित करता हूँ। मेरे अनुभव में सरकारी, स्वास्थ्य सेवा, और ई-कॉमर्स डोमेन शामिल हैं, जिसमें स्वच्छ, कुशल कोड और प्रदर्शन ऑप्टिमाइजेशन पर जोर दिया गया है।',
+                'bio_p2': 'मैंने 10 से अधिक सार्वजनिक-सामने सरकारी और एंटरप्राइज़ एप्लिकेशन वितरित किए हैं, जिससे सुचारु सिस्टम संचालन और सहज एकीकरण सुनिश्चित हुआ है।',
+                'Full Technical Stack & Integrations': 'संपूर्ण तकनीकी स्टैक और एकीकरण',
+                
+                // Services
+                'services_heading': 'प्रस्तावित सेवाएं',
+                'services_subheading': 'व्यापक फुल-स्टैक और विशेष एप्लिकेशन विकास प्रदान करने के लिए 7+ वर्षों के अनुभव का लाभ उठाना।',
+                'service_web_title': 'वेब विकास',
+                'service_web_desc': 'MEAN स्टैक (एंगुलर, Node.js, MySQL/MongoDB) और .NET/PHP जैसे अन्य फ्रेमवर्क का उपयोग करके स्केलेबल वेब एप्लिकेशन, RESTful API और सरकारी पोर्टल्स का एंड-टू-एंड विकास।',
+                'service_mobile_title': 'मोबाइल एप्लिकेशन विकास',
+                'service_mobile_desc': 'React Native (या समान तकनीक) जैसे आधुनिक फ्रेमवर्क पर ध्यान केंद्रित करते हुए क्रॉस-प्लेटफ़ॉर्म मोबाइल समाधानों का विकास, जो तेज़, प्रतिक्रियाशील और डेटा-चालित एप्लिकेशन बनाने के लिए मौजूदा API के साथ एकीकृत होते हैं।',
+                'service_arch_title': 'सिस्टम आर्किटेक्चर और ऑप्टिमाइजेशन',
+                'service_arch_desc': 'एंटरप्राइज सिस्टम के लिए उच्च दक्षता और पारदर्शिता सुनिश्चित करने हेतु सिस्टम आर्किटेक्चर, डेटाबेस डिज़ाइन (MySQL, MSSQL), प्रदर्शन ट्यूनिंग और जटिल वर्कफ़्लो को ऑप्टिमाइज़ करने पर परामर्श।',
+                
+                // Projects
+                'projects_heading': 'मुख्य सरकारी और एंटरप्राइज़ परियोजनाएं',
+                'p1_title': 'सीजी स्वास्थ्य, आयुष और एनएचएम पोर्टल सूट',
+                'p1_desc': 'छत्तीसगढ़ के नागरिकों को आवश्यक सेवाओं, डिजिटल फॉर्म और स्वास्थ्य जानकारी तक पहुँच प्रदान करने के लिए कई सार्वजनिक-सामने सरकारी वेबसाइटें विकसित कीं।',
+                'p2_title': 'टीबी कैंप और MOPS (रोग प्रबंधन)',
+                'p2_desc': 'सार्वजनिक स्वास्थ्य विश्लेषण और पारदर्शिता में सुधार के लिए ग्राम-वार रोग सर्वेक्षण डेटा भंडारण (टीबी कैंप) और ऑनलाइन शव-परीक्षा मामलों की ट्रैकिंग/निगरानी (MOPS) के लिए सॉफ्टवेयर समाधान बनाए गए।',
+                'p3_title': 'एचएमआईएस और ई-कल्याणी (स्वास्थ्य सेवा समाधान)',
+                'p3_desc': 'अस्पतालों में OPD/IPD सेवाओं को ट्रैक करने के लिए HMIS डिज़ाइन किया गया और व्यापक गर्भपात देखभाल सेवाओं के लिए अनुमोदन और रिपोर्टिंग का प्रबंधन करने हेतु ई-कल्याणी वेबसाइट विकसित की गई।',
+                'p4_title': 'WooduTrade और Classic Sparklers',
+                'p4_desc': 'WooduTrade (विक्रेता पंजीकरण मॉड्यूल) जैसे एंटरप्राइज़ एप्लिकेशन में योगदान दिया और Classic Sparklers (व्यापक API एकीकरण: FedEx, Heartland, Google, आदि के साथ ऑनलाइन अकाउंटिंग/बिलिंग सिस्टम) बनाया।',
+
+                // Certificates
+                'cert_heading': 'प्रमाण पत्र',
+                'cert_subheading': 'मुख्य प्रौद्योगिकियों और विकास पद्धतियों में सत्यापन योग्य विशेषज्ञता।',
+                'c1_title': 'MEAN स्टैक विकास',
+                'c1_desc': '[प्लेसहोल्डर संस्थान/प्लेटफ़ॉर्म] से प्रशिक्षण/प्रमाणन',
+                'c2_title': 'एडब्ल्यूएस क्लाउड प्रैक्टिशनर',
+                'c2_desc': 'क्लाउड सेवाओं में प्रमाणन/प्रशिक्षण',
+                'c3_title': 'एजाइल/स्क्रैम कार्यप्रणाली',
+                'c3_desc': 'परियोजना प्रबंधन तकनीकों में प्रशिक्षण',
+                'c4_title': 'जावास्क्रिप्ट/टाइपस्क्रिप्ट',
+                'c4_desc': 'उन्नत कोडिंग कौशल प्रमाणपत्र',
+                'cert_note': '*कृपया अपने प्रमाण पत्रों के वास्तविक नाम, तिथियां, और जारी करने वाले निकायों के साथ उपरोक्त प्लेसहोल्डर जानकारी को बदलें।',
+
+                // Contact
+                'contact_heading': 'क्या आप कोई प्रोजेक्ट शुरू करने के लिए तैयार हैं?',
+                'contact_subheading': 'मैं सीनियर फुल-स्टैक डेवलपर अवसरों और नए परामर्श परियोजनाओं के लिए खुला हूँ।',
+                'footer_text': '&copy; 2025 Pritam Kumar. स्वच्छ कोड के साथ बनाया गया।'
+            }
+        };
+
+        let currentLang = 'en';
+
+        // --- 2. TRANSLATION FUNCTION ---
+        function updateContent(lang) {
+            document.querySelectorAll('[data-en], [data-id]').forEach(element => {
+                let key = element.getAttribute('data-id') || element.getAttribute('data-en');
+                
+                if (element.hasAttribute('data-en')) {
+                    // For static links/buttons in nav, use data-en/data-hi attributes
+                    if (lang === 'hi' && element.hasAttribute('data-hi')) {
+                        element.textContent = element.getAttribute('data-hi');
+                    } else if (lang === 'en') {
+                        element.textContent = element.getAttribute('data-en');
+                    }
+                } else if (languageData[lang] && languageData[lang][key]) {
+                    // For dynamic text blocks using data-id
+                    element.textContent = languageData[lang][key];
+                } else if (languageData.en && languageData.en[key]) {
+                    // Fallback to English if translation is missing
+                    element.textContent = languageData.en[key];
+                }
+            });
+            // Update the HTML language attribute for accessibility
+            document.documentElement.lang = lang;
+        }
+
+        // --- 3. TOGGLE FUNCTION ---
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            updateContent(currentLang);
+            // Store preference in localStorage (optional but recommended)
+            localStorage.setItem('portfolioLang', currentLang);
+        }
+
+        // --- 4. INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check for stored language preference
+            const storedLang = localStorage.getItem('portfolioLang');
+            if (storedLang && storedLang !== 'en') {
+                currentLang = storedLang;
+                updateContent(currentLang);
+            } else {
+                // Ensure English defaults are loaded if no preference exists
+                updateContent('en');
+            }
+        });
+    </script>
 
 </body>
 </html>
