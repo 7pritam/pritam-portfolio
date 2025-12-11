@@ -12,10 +12,10 @@
     <style>
         /* --- 1. CORE VARIABLES & RESET --- */
         :root {
-            --bg-dark: #0f172a;
-            --bg-card: #1e293b;
-            --accent-primary: #38bdf8;
-            --accent-secondary: #818cf8;
+            --bg-dark: #0f172a;       /* Deep Slate */
+            --bg-card: #1e293b;       /* Lighter Slate */
+            --accent-primary: #38bdf8; /* Cyan */
+            --accent-secondary: #818cf8; /* Indigo */
             --text-main: #f1f5f9;
             --text-muted: #94a3b8;
             --gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
@@ -26,7 +26,7 @@
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
-            font-family: 'Outfit', 'Noto Sans', sans-serif; /* Added Noto Sans for Hindi support */
+            font-family: 'Outfit', 'Noto Sans', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
         }
@@ -57,42 +57,56 @@
         .nav-links { display: flex; gap: 30px; }
         .nav-links a { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; }
         .nav-links a:hover { color: var(--accent-primary); }
-
-        /* Language Toggle Button Style */
         .lang-toggle {
-            padding: 8px 15px;
-            border: 1px solid var(--accent-primary);
-            border-radius: 50px;
-            color: var(--accent-primary);
-            font-size: 0.9rem;
-            font-weight: 600;
-            background: transparent;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-right: 15px;
+            padding: 8px 15px; border: 1px solid var(--accent-primary); border-radius: 50px;
+            color: var(--accent-primary); font-size: 0.9rem; font-weight: 600;
+            background: transparent; cursor: pointer; transition: 0.3s; margin-right: 15px;
         }
-        .lang-toggle:hover {
-            background: rgba(56, 189, 248, 0.15);
-            color: white;
-        }
-        
+        .lang-toggle:hover { background: rgba(56, 189, 248, 0.15); color: white; }
         .nav-btn {
             padding: 8px 20px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50px; color: white;
         }
         .nav-btn:hover { border-color: var(--accent-primary); background: rgba(56, 189, 248, 0.1); }
 
-        /* --- 4. HERO SECTION --- */
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; }
-        .hero::before { content: ''; position: absolute; width: 300px; height: 300px; background: var(--accent-primary); filter: blur(150px); opacity: 0.2; z-index: -1; top: 20%; }
+
+        /* --- 4. HERO SECTION (With Particle Container) --- */
+        .hero { 
+            min-height: 100vh; display: flex; align-items: center; justify-content: center; 
+            text-align: center; position: relative; z-index: 1; 
+        }
+
+        /* Particle Background Container */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Ensure it stays behind the content */
+            background-color: var(--bg-dark);
+            background-image: url('');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 50% 50%;
+        }
+
+        .hero h1, .hero p, .hero-btns {
+            position: relative;
+            z-index: 2; /* Ensure content is above particles */
+        }
         .hero h1 { font-size: 5rem; line-height: 1.1; font-weight: 800; letter-spacing: -2px; margin-bottom: 20px; }
         .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px auto; }
         .hero-btns { display: flex; gap: 20px; justify-content: center; }
-        .btn-primary { background: var(--gradient); color: #fff; padding: 14px 36px; border-radius: 50px; font-weight: 600; box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2); }
+        .btn-primary { 
+            background: var(--gradient); color: #fff; padding: 14px 36px; border-radius: 50px; 
+            font-weight: 600; box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2); 
+        }
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(56, 189, 248, 0.3); }
         .btn-secondary { background: rgba(255,255,255,0.05); color: white; padding: 14px 36px; border-radius: 50px; font-weight: 600; }
         .btn-secondary:hover { background: rgba(255,255,255,0.1); }
 
-        /* --- 5. BENTO GRID --- */
+
+        /* --- 5. OTHER SECTIONS (CSS Kept from Previous Version) --- */
         .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, auto); gap: 20px; }
         .bento-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 30px; position: relative; overflow: hidden; transition: transform 0.3s ease; }
         .bento-card:hover { transform: translateY(-5px); border-color: rgba(56, 189, 248, 0.3); }
@@ -106,8 +120,6 @@
         .skill-list { display: flex; flex-wrap: wrap; gap: 12px; }
         .skill-pill { background: rgba(255,255,255,0.05); padding: 8px 16px; border-radius: 8px; font-size: 0.9rem; border: 1px solid transparent; transition: 0.3s; }
         .skill-pill:hover { border-color: var(--accent-primary); color: var(--accent-primary); background: rgba(56, 189, 248, 0.05); }
-
-        /* --- 6. SERVICES SECTION --- */
         .services-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
         .service-card {
             background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px;
@@ -119,8 +131,6 @@
             font-size: 3rem; margin-bottom: 20px; background: var(--gradient);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-
-        /* --- 7. PROJECTS --- */
         .projects-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 40px; }
         .project-card {
             background: var(--bg-card); border-radius: 20px; padding: 40px 30px;
@@ -135,15 +145,11 @@
         .project-tech { font-size: 0.85rem; color: var(--accent-primary); margin-bottom: 15px; font-family: 'Space Grotesk', monospace; }
         .project-link { display: inline-block; margin-top: 15px; font-size: 0.9rem; font-weight: 600; color: var(--accent-primary); }
         .project-link:hover { color: #818cf8; }
-
-        /* --- 8. CERTIFICATES SECTION --- */
         .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; text-align: center; }
         .cert-card { background: var(--bg-dark); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 25px; transition: background 0.3s, border-color 0.3s; }
         .cert-card:hover { background: #233045; border-color: var(--accent-secondary); }
         .cert-card h3 { font-size: 1.25rem; margin-bottom: 5px; color: var(--accent-primary); }
         .cert-card p { color: var(--text-muted); font-size: 0.9rem; }
-
-        /* --- 9. CONTACT / FOOTER --- */
         .contact-section { text-align: center; background: linear-gradient(180deg, var(--bg-dark) 0%, #172033 100%); }
         .contact-btn {
             display: inline-flex; align-items: center; gap: 10px; background: var(--bg-card);
@@ -151,7 +157,7 @@
             font-size: 1.1rem; margin: 10px; color: var(--text-main);
         }
         .contact-btn:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
-        
+
         /* --- MOBILE --- */
         @media (max-width: 768px) {
             .hero h1 { font-size: 3rem; }
@@ -162,6 +168,8 @@
     </style>
 </head>
 <body>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
     <nav>
         <div class="container nav-inner">
@@ -181,6 +189,8 @@
     </nav>
 
     <section class="hero">
+        <div id="particles-js"></div>
+        
         <div class="container">
             <h1 class="fade-in"><span data-id="hero_greeting">Hi, I'm</span> <span class="gradient-text">Pritam Kumar</span></h1>
             <p data-id="hero_summary">Senior Full-Stack Developer with 7+ years of expertise in the MEAN stack. I build scalable, high-performance digital solutions for government and enterprise clients.</p>
@@ -352,118 +362,156 @@
     </section>
     
     <script>
-        // --- 1. LANGUAGE DATA OBJECT ---
+        // --- LANGUAGE DATA OBJECT (UNCHANGED) ---
         const languageData = {
             hi: {
-                // Navigation/Buttons
-                'hero_greeting': 'नमस्ते, मैं',
-                'Hire Me': 'हायर करें',
-                'View Services': 'सेवाएं देखें',
-                'About': 'परिचय',
-                'Stack': 'तकनीकी',
-                'Services': 'सेवाएं',
-                'Work': 'कार्य',
-                'Certificates': 'प्रमाण पत्र',
-                'Years Experience': 'वर्षों का अनुभव',
-                'Live Projects': 'लाइव परियोजनाएं',
-                'View Project': 'परियोजना देखें',
-
-                // Hero/Summary
+                'hero_greeting': 'नमस्ते, मैं', 'Hire Me': 'हायर करें', 'View Services': 'सेवाएं देखें', 'About': 'परिचय', 'Stack': 'तकनीकी', 'Services': 'सेवाएं', 'Work': 'कार्य', 'Certificates': 'प्रमाण पत्र', 'Years Experience': 'वर्षों का अनुभव', 'Live Projects': 'लाइव परियोजनाएं', 'View Project': 'परियोजना देखें',
                 'hero_summary': 'MEAN स्टैक में 7+ वर्षों की विशेषज्ञता वाला सीनियर फुल-स्टैक डेवलपर। मैं सरकारी और एंटरप्राइज़ ग्राहकों के लिए स्केलेबल, उच्च-प्रदर्शन वाले डिजिटल समाधान बनाता हूँ।',
-
-                // About
-                'About Me': 'मेरे बारे में',
-                'bio_title': 'मज़बूत वेब समाधानों का इंजीनियरिंग',
+                'About Me': 'मेरे बारे में', 'bio_title': 'मज़बूत वेब समाधानों का इंजीनियरिंग',
                 'bio_p1': 'मैं एंगुलर, Node.js, और MySQL में विशेषज्ञता वाला एक सीनियर सॉफ्टवेयर इंजीनियर हूँ। मैं स्केलेबल वेब एप्लिकेशन विकसित करने और तैनात करने पर ध्यान केंद्रित करता हूँ। मेरे अनुभव में सरकारी, स्वास्थ्य सेवा, और ई-कॉमर्स डोमेन शामिल हैं, जिसमें स्वच्छ, कुशल कोड और प्रदर्शन ऑप्टिमाइजेशन पर जोर दिया गया है।',
                 'bio_p2': 'मैंने 10 से अधिक सार्वजनिक-सामने सरकारी और एंटरप्राइज़ एप्लिकेशन वितरित किए हैं, जिससे सुचारु सिस्टम संचालन और सहज एकीकरण सुनिश्चित हुआ है।',
                 'Full Technical Stack & Integrations': 'संपूर्ण तकनीकी स्टैक और एकीकरण',
-                
-                // Services
-                'services_heading': 'प्रस्तावित सेवाएं',
-                'services_subheading': 'व्यापक फुल-स्टैक और विशेष एप्लिकेशन विकास प्रदान करने के लिए 7+ वर्षों के अनुभव का लाभ उठाना।',
-                'service_web_title': 'वेब विकास',
-                'service_web_desc': 'MEAN स्टैक (एंगुलर, Node.js, MySQL/MongoDB) और .NET/PHP जैसे अन्य फ्रेमवर्क का उपयोग करके स्केलेबल वेब एप्लिकेशन, RESTful API और सरकारी पोर्टल्स का एंड-टू-एंड विकास।',
-                'service_mobile_title': 'मोबाइल एप्लिकेशन विकास',
-                'service_mobile_desc': 'React Native (या समान तकनीक) जैसे आधुनिक फ्रेमवर्क पर ध्यान केंद्रित करते हुए क्रॉस-प्लेटफ़ॉर्म मोबाइल समाधानों का विकास, जो तेज़, प्रतिक्रियाशील और डेटा-चालित एप्लिकेशन बनाने के लिए मौजूदा API के साथ एकीकृत होते हैं।',
-                'service_arch_title': 'सिस्टम आर्किटेक्चर और ऑप्टिमाइजेशन',
-                'service_arch_desc': 'एंटरप्राइज सिस्टम के लिए उच्च दक्षता और पारदर्शिता सुनिश्चित करने हेतु सिस्टम आर्किटेक्चर, डेटाबेस डिज़ाइन (MySQL, MSSQL), प्रदर्शन ट्यूनिंग और जटिल वर्कफ़्लो को ऑप्टिमाइज़ करने पर परामर्श।',
-                
-                // Projects
+                'services_heading': 'प्रस्तावित सेवाएं', 'services_subheading': 'व्यापक फुल-स्टैक और विशेष एप्लिकेशन विकास प्रदान करने के लिए 7+ वर्षों के अनुभव का लाभ उठाना।',
+                'service_web_title': 'वेब विकास', 'service_web_desc': 'MEAN स्टैक (एंगुलर, Node.js, MySQL/MongoDB) और .NET/PHP जैसे अन्य फ्रेमवर्क का उपयोग करके स्केलेबल वेब एप्लिकेशन, RESTful API और सरकारी पोर्टल्स का एंड-टू-एंड विकास।',
+                'service_mobile_title': 'मोबाइल एप्लिकेशन विकास', 'service_mobile_desc': 'React Native (या समान तकनीक) जैसे आधुनिक फ्रेमवर्क पर ध्यान केंद्रित करते हुए क्रॉस-प्लेटफ़ॉर्म मोबाइल समाधानों का विकास, जो तेज़, प्रतिक्रियाशील और डेटा-चालित एप्लिकेशन बनाने के लिए मौजूदा API के साथ एकीकृत होते हैं।',
+                'service_arch_title': 'सिस्टम आर्किटेक्चर और ऑप्टिमाइजेशन', 'service_arch_desc': 'एंटरप्राइज सिस्टम के लिए उच्च दक्षता और पारदर्शिता सुनिश्चित करने हेतु सिस्टम आर्किटेक्चर, डेटाबेस डिज़ाइन (MySQL, MSSQL), प्रदर्शन ट्यूनिंग और जटिल वर्कफ़्लो को ऑप्टिमाइज़ करने पर परामर्श।',
                 'projects_heading': 'मुख्य सरकारी और एंटरप्राइज़ परियोजनाएं',
-                'p1_title': 'सीजी स्वास्थ्य, आयुष और एनएचएम पोर्टल सूट',
-                'p1_desc': 'छत्तीसगढ़ के नागरिकों को आवश्यक सेवाओं, डिजिटल फॉर्म और स्वास्थ्य जानकारी तक पहुँच प्रदान करने के लिए कई सार्वजनिक-सामने सरकारी वेबसाइटें विकसित कीं।',
-                'p2_title': 'टीबी कैंप और MOPS (रोग प्रबंधन)',
-                'p2_desc': 'सार्वजनिक स्वास्थ्य विश्लेषण और पारदर्शिता में सुधार के लिए ग्राम-वार रोग सर्वेक्षण डेटा भंडारण (टीबी कैंप) और ऑनलाइन शव-परीक्षा मामलों की ट्रैकिंग/निगरानी (MOPS) के लिए सॉफ्टवेयर समाधान बनाए गए।',
-                'p3_title': 'एचएमआईएस और ई-कल्याणी (स्वास्थ्य सेवा समाधान)',
-                'p3_desc': 'अस्पतालों में OPD/IPD सेवाओं को ट्रैक करने के लिए HMIS डिज़ाइन किया गया और व्यापक गर्भपात देखभाल सेवाओं के लिए अनुमोदन और रिपोर्टिंग का प्रबंधन करने हेतु ई-कल्याणी वेबसाइट विकसित की गई।',
-                'p4_title': 'WooduTrade और Classic Sparklers',
-                'p4_desc': 'WooduTrade (विक्रेता पंजीकरण मॉड्यूल) जैसे एंटरप्राइज़ एप्लिकेशन में योगदान दिया और Classic Sparklers (व्यापक API एकीकरण: FedEx, Heartland, Google, आदि के साथ ऑनलाइन अकाउंटिंग/बिलिंग सिस्टम) बनाया।',
-
-                // Certificates
-                'cert_heading': 'प्रमाण पत्र',
-                'cert_subheading': 'मुख्य प्रौद्योगिकियों और विकास पद्धतियों में सत्यापन योग्य विशेषज्ञता।',
-                'c1_title': 'MEAN स्टैक विकास',
-                'c1_desc': '[प्लेसहोल्डर संस्थान/प्लेटफ़ॉर्म] से प्रशिक्षण/प्रमाणन',
-                'c2_title': 'एडब्ल्यूएस क्लाउड प्रैक्टिशनर',
-                'c2_desc': 'क्लाउड सेवाओं में प्रमाणन/प्रशिक्षण',
-                'c3_title': 'एजाइल/स्क्रैम कार्यप्रणाली',
-                'c3_desc': 'परियोजना प्रबंधन तकनीकों में प्रशिक्षण',
-                'c4_title': 'जावास्क्रिप्ट/टाइपस्क्रिप्ट',
-                'c4_desc': 'उन्नत कोडिंग कौशल प्रमाणपत्र',
+                'p1_title': 'सीजी स्वास्थ्य, आयुष और एनएचएम पोर्टल सूट', 'p1_desc': 'छत्तीसगढ़ के नागरिकों को आवश्यक सेवाओं, डिजिटल फॉर्म और स्वास्थ्य जानकारी तक पहुँच प्रदान करने के लिए कई सार्वजनिक-सामने सरकारी वेबसाइटें विकसित कीं।',
+                'p2_title': 'टीबी कैंप और MOPS (रोग प्रबंधन)', 'p2_desc': 'सार्वजनिक स्वास्थ्य विश्लेषण और पारदर्शिता में सुधार के लिए ग्राम-वार रोग सर्वेक्षण डेटा भंडारण (टीबी कैंप) और ऑनलाइन शव-परीक्षा मामलों की ट्रैकिंग/निगरानी (MOPS) के लिए सॉफ्टवेयर समाधान बनाए गए।',
+                'p3_title': 'एचएमआईएस और ई-कल्याणी (स्वास्थ्य सेवा समाधान)', 'p3_desc': 'अस्पतालों में OPD/IPD सेवाओं को ट्रैक करने के लिए HMIS डिज़ाइन किया गया और व्यापक गर्भपात देखभाल सेवाओं के लिए अनुमोदन और रिपोर्टिंग का प्रबंधन करने हेतु ई-कल्याणी वेबसाइट विकसित की गई।',
+                'p4_title': 'WooduTrade और Classic Sparklers', 'p4_desc': 'WooduTrade (विक्रेता पंजीकरण मॉड्यूल) जैसे एंटरप्राइज़ एप्लिकेशन में योगदान दिया और Classic Sparklers (व्यापक API एकीकरण: FedEx, Heartland, Google, आदि के साथ ऑनलाइन अकाउंटिंग/बिलिंग सिस्टम) बनाया।',
+                'cert_heading': 'प्रमाण पत्र', 'cert_subheading': 'मुख्य प्रौद्योगिकियों और विकास पद्धतियों में सत्यापन योग्य विशेषज्ञता।',
+                'c1_title': 'MEAN स्टैक विकास', 'c1_desc': '[प्लेसहोल्डर संस्थान/प्लेटफ़ॉर्म] से प्रशिक्षण/प्रमाणन',
+                'c2_title': 'एडब्ल्यूएस क्लाउड प्रैक्टिशनर', 'c2_desc': 'क्लाउड सेवाओं में प्रमाणन/प्रशिक्षण',
+                'c3_title': 'एजाइल/स्क्रैम कार्यप्रणाली', 'c3_desc': 'परियोजना प्रबंधन तकनीकों में प्रशिक्षण',
+                'c4_title': 'जावास्क्रिप्ट/टाइपस्क्रिप्ट', 'c4_desc': 'उन्नत कोडिंग कौशल प्रमाणपत्र',
                 'cert_note': '*कृपया अपने प्रमाण पत्रों के वास्तविक नाम, तिथियां, और जारी करने वाले निकायों के साथ उपरोक्त प्लेसहोल्डर जानकारी को बदलें।',
-
-                // Contact
-                'contact_heading': 'क्या आप कोई प्रोजेक्ट शुरू करने के लिए तैयार हैं?',
-                'contact_subheading': 'मैं सीनियर फुल-स्टैक डेवलपर अवसरों और नए परामर्श परियोजनाओं के लिए खुला हूँ।',
+                'contact_heading': 'क्या आप कोई प्रोजेक्ट शुरू करने के लिए तैयार हैं?', 'contact_subheading': 'मैं सीनियर फुल-स्टैक डेवलपर अवसरों और नए परामर्श परियोजनाओं के लिए खुला हूँ।',
                 'footer_text': '&copy; 2025 Pritam Kumar. स्वच्छ कोड के साथ बनाया गया।'
             }
         };
 
         let currentLang = 'en';
 
-        // --- 2. TRANSLATION FUNCTION ---
+        // --- 2. TRANSLATION FUNCTION (UNCHANGED) ---
         function updateContent(lang) {
             document.querySelectorAll('[data-en], [data-id]').forEach(element => {
                 let key = element.getAttribute('data-id') || element.getAttribute('data-en');
                 
                 if (element.hasAttribute('data-en')) {
-                    // For static links/buttons in nav, use data-en/data-hi attributes
                     if (lang === 'hi' && element.hasAttribute('data-hi')) {
                         element.textContent = element.getAttribute('data-hi');
                     } else if (lang === 'en') {
                         element.textContent = element.getAttribute('data-en');
                     }
                 } else if (languageData[lang] && languageData[lang][key]) {
-                    // For dynamic text blocks using data-id
                     element.textContent = languageData[lang][key];
                 } else if (languageData.en && languageData.en[key]) {
-                    // Fallback to English if translation is missing
                     element.textContent = languageData.en[key];
                 }
             });
-            // Update the HTML language attribute for accessibility
             document.documentElement.lang = lang;
         }
 
-        // --- 3. TOGGLE FUNCTION ---
+        // --- 3. TOGGLE FUNCTION (UNCHANGED) ---
         function toggleLanguage() {
             currentLang = currentLang === 'en' ? 'hi' : 'en';
             updateContent(currentLang);
-            // Store preference in localStorage (optional but recommended)
             localStorage.setItem('portfolioLang', currentLang);
         }
 
-        // --- 4. INITIALIZATION ---
+        // --- 4. INITIALIZATION & PARTICLE CONFIGURATION ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Check for stored language preference
+            // Language Initialization
             const storedLang = localStorage.getItem('portfolioLang');
             if (storedLang && storedLang !== 'en') {
                 currentLang = storedLang;
                 updateContent(currentLang);
             } else {
-                // Ensure English defaults are loaded if no preference exists
                 updateContent('en');
             }
+
+            // Particle.js Configuration
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#38bdf8" // Match the primary accent color
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#ffffff"
+                        },
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": false,
+                        "anim": {
+                            "enable": false,
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": false,
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#818cf8", // Match the secondary accent color
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": false,
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab" // Connects lines on mouse hover
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "push": {
+                            "particles_number": 4
+                        },
+                    }
+                },
+                "retina_detect": true
+            });
         });
     </script>
 
