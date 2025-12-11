@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pritam Kumar | Senior Full Stack Developer</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;800&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. CORE VARIABLES & RESET --- */
+        :root {
+            --bg-dark: #0f172a;       /* Deep Slate */
+            --bg-card: #1e293b;       /* Lighter Slate */
+            --accent-primary: #38bdf8; /* Cyan */
+            --accent-secondary: #818cf8; /* Indigo */
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- 2. LAYOUT & UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section { padding: 100px 0; }
+
+        .gradient-text {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        h2 { font-size: 2.5rem; margin-bottom: 20px; }
+
+        /* --- 3. GLASS NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 0;
+            background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px);
+            z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; letter-spacing: -1px; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; }
+        .nav-links a:hover { color: var(--accent-primary); }
+        .nav-btn { padding: 8px 20px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50px; color: white; }
+        .nav-btn:hover { border-color: var(--accent-primary); background: rgba(56, 189, 248, 0.1); }
+
+        /* --- 4. HERO SECTION --- */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; }
+        .hero::before { content: ''; position: absolute; width: 300px; height: 300px; background: var(--accent-primary); filter: blur(150px); opacity: 0.2; z-index: -1; top: 20%; }
+        .hero h1 { font-size: 5rem; line-height: 1.1; font-weight: 800; letter-spacing: -2px; margin-bottom: 20px; }
+        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px auto; }
+        .hero-btns { display: flex; gap: 20px; justify-content: center; }
+        .btn-primary { background: var(--gradient); color: #fff; padding: 14px 36px; border-radius: 50px; font-weight: 600; box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(56, 189, 248, 0.3); }
+        .btn-secondary { background: rgba(255,255,255,0.05); color: white; padding: 14px 36px; border-radius: 50px; font-weight: 600; }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+        /* --- 5. BENTO GRID (ABOUT & SKILLS) --- */
+        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, auto); gap: 20px; }
+        .bento-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 30px; position: relative; overflow: hidden; transition: transform 0.3s ease; }
+        .bento-card:hover { transform: translateY(-5px); border-color: rgba(56, 189, 248, 0.3); }
+        .bento-title { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 15px; display: block; }
+        .card-bio { grid-column: span 2; }
+        .card-stats { grid-column: span 1; display: flex; flex-direction: column; justify-content: center; }
+        .card-skills { grid-column: span 3; }
+        .stat-item { margin-bottom: 15px; }
+        .stat-num { font-size: 2.5rem; font-weight: 700; color: var(--accent-primary); line-height: 1; }
+        .stat-label { font-size: 0.9rem; color: var(--text-muted); }
+        .skill-list { display: flex; flex-wrap: wrap; gap: 12px; }
+        .skill-pill { background: rgba(255,255,255,0.05); padding: 8px 16px; border-radius: 8px; font-size: 0.9rem; border: 1px solid transparent; transition: 0.3s; }
+        .skill-pill:hover { border-color: var(--accent-primary); color: var(--accent-primary); background: rgba(56, 189, 248, 0.05); }
+
+        /* --- 6. PROJECTS (with stylish hover effect) --- */
+        .projects-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 40px; }
+        .project-card {
+            background: var(--bg-card); border-radius: 20px; padding: 40px 30px;
+            border: 1px solid rgba(255,255,255,0.05); transition: transform 0.5s ease, box-shadow 0.5s ease;
+            position: relative; transform-style: preserve-3d;
+        }
+        .project-card:hover {
+            transform: translateY(-8px) rotateX(1deg) rotateY(-1deg);
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.2), 0 0 10px rgba(56, 189, 248, 0.5);
+            background: #233045; border-color: var(--accent-primary);
+        }
+        .project-tech { font-size: 0.85rem; color: var(--accent-primary); margin-bottom: 15px; font-family: 'Space Grotesk', monospace; }
+        .project-link { display: inline-block; margin-top: 15px; font-size: 0.9rem; font-weight: 600; color: var(--accent-primary); }
+        .project-link:hover { color: #818cf8; }
+
+        /* --- 7. SERVICES SECTION (NEW) --- */
+        .services-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 40px 30px;
+            transition: transform 0.3s, border-color 0.3s;
+            text-align: center;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-primary);
+        }
+        .service-card h3 {
+            font-size: 1.5rem;
+            color: var(--accent-primary);
+            margin-bottom: 15px;
+        }
+        .service-card .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        /* --- 8. CERTIFICATES SECTION --- */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .cert-card {
+            background: var(--bg-dark);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 25px;
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .cert-card:hover {
+            background: #233045;
+            border-color: var(--accent-secondary);
+        }
+
+        .cert-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 5px;
+            color: var(--accent-primary);
+        }
+
+        .cert-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+
+        /* --- 9. CONTACT / FOOTER --- */
+        .contact-section { text-align: center; background: linear-gradient(180deg, var(--bg-dark) 0%, #172033 100%); }
+        .contact-btn {
+            display: inline-flex; align-items: center; gap: 10px; background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.1); padding: 15px 30px; border-radius: 10px;
+            font-size: 1.1rem; margin: 10px; color: var(--text-main);
+        }
+        .contact-btn:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .card-bio, .card-skills { grid-column: span 1; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+            <div class="logo">Pritam<span style="color:var(--accent-primary)">.</span></div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#stack">Stack</a>
+                <a href="#services">Services</a>
+                <a href="#projects">Work</a>
+                <a href="#certificates">Certificates</a>
+            </div>
+            <a href="mailto:pritamtandan@gmail.com" class="nav-btn">Hire Me</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="fade-in">Hi, I'm <span class="gradient-text">Pritam Kumar</span></h1>
+            <p>Senior Full-Stack Developer with 7+ years of expertise in the MEAN stack. I build scalable, high-performance digital solutions for government and enterprise clients.</p>
+            <div class="hero-btns">
+                <a href="#services" class="btn-primary">View Services</a>
+                <a href="https://in.linkedin.com/in/pritam-kumar-853b61120" target="_blank" class="btn-secondary">LinkedIn Profile</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="bento-grid">
+                
+                <div class="bento-card card-bio">
+                    <span class="bento-title">About Me</span>
+                    <h2 style="font-size: 1.8rem; margin-bottom: 15px;">Engineering Robust Web Solutions</h2>
+                    <p style="color: var(--text-muted);">
+                        I am a Senior Software Engineer specializing in Angular, Node.js, and MySQL. I focus on developing and deploying scalable web applications. My experience spans government, healthcare, and e-commerce domains, emphasizing clean, efficient code and performance optimization.
+                    </p>
+                    <p style="color: var(--text-muted); margin-top: 15px;">
+                        I have delivered over 10 public-facing government and enterprise applications, ensuring smooth system operations and seamless integrations.
+                    </p>
+                </div>
+
+                <div class="bento-card card-stats">
+                    <div class="stat-item">
+                        <div class="stat-num">7+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">10+</div>
+                        <div class="stat-label">Live Projects</div>
+                    </div>
+                </div>
+
+                <div class="bento-card card-skills" id="stack">
+                    <span class="bento-title">Full Technical Stack & Integrations</span>
+                    <div class="skill-list">
+                        <span class="skill-pill">Angular</span>
+                        <span class="skill-pill">Node.js</span>
+                        <span class="skill-pill">MySQL / MSSQL / MongoDB</span>
+                        <span class="skill-pill">.NET / PHP / ColdFusion</span>
+                        <span class="skill-pill">React</span>
+                        <span class="skill-pill">AWS (S3)</span>
+                        <span class="skill-pill">Heartland API (Payment)</span>
+                        <span class="skill-pill">FedEx API (Shipping)</span>
+                        <span class="skill-pill">Google / Facebook / Outlook API</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2>Services Offered</h2>
+            <p style="color: var(--text-muted); margin-bottom: 40px;">Leveraging 7+ years of experience to deliver comprehensive full-stack and specialized application development.</p>
+            <div class="services-wrapper">
+                
+                <div class="service-card">
+                    <div class="icon">💻</div>
+                    <h3>Web Development</h3>
+                    <p style="color: var(--text-muted);">End-to-end development of scalable web applications, RESTful APIs, and government portals using the MEAN Stack (Angular, Node.js, MySQL/MongoDB) and other frameworks like .NET/PHP.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon">📱</div>
+                    <h3>Mobile Application Development</h3>
+                    <p style="color: var(--text-muted);">Development of cross-platform mobile solutions, focusing on modern frameworks like React Native (or similar tech) to build fast, responsive, and data-driven applications that integrate with existing APIs.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon">⚙️</div>
+                    <h3>System Architecture & Optimization</h3>
+                    <p style="color: var(--text-muted);">Consultation on system architecture, database design (MySQL, MSSQL), performance tuning, and optimizing complex workflows to ensure high efficiency and transparency for enterprise systems.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" style="background: var(--bg-card);">
+        <div class="container">
+            <h2>Key Government & Enterprise Projects</h2>
+            <div class="projects-wrapper">
+
+                <div class="project-card">
+                    <div class="project-tech">Angular • Node.js • MySQL</div>
+                    <h3>CG Health, Ayush & NHM Portal Suite</h3>
+                    <p style="color: var(--text-muted)">Developed multiple public-facing government websites to provide citizens of Chhattisgarh with access to essential services, digital forms, and health information.</p>
+                    <a href="#" target="_blank" class="project-link">View CG Health Portal &rarr;</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-tech">Angular • Node.js • MySQL</div>
+                    <h3>TB Camp & MOPS (Disease Management)</h3>
+                    <p style="color: var(--text-muted)">Created software solutions for village-wise disease survey data storage (TB Camp) and online tracking/monitoring of post-mortem cases (MOPS) to improve public health analysis and transparency.</p>
+                    <a href="#" target="_blank" class="project-link">View TB Camp System &rarr;</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-tech">Angular • Node.js • MySQL</div>
+                    <h3>HMIS & E-Kalyani (Healthcare Solutions)</h3>
+                    <p style="color: var(--text-muted)">Designed HMIS for tracking OPD/IPD services in hospitals and developed the E-Kalyani website to manage approval and reporting for Comprehensive Abortion Care services.</p>
+                    <a href="#" target="_blank" class="project-link">View HMIS Portal &rarr;</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-tech">Angular • PHP • ColdFusion • API Integration</div>
+                    <h3>WooduTrade & Classic Sparklers</h3>
+                    <p style="color: var(--text-muted)">Contributed to enterprise applications like WooduTrade (vendor registration module) and built Classic Sparklers (online accounting/billing system with extensive API integration: FedEx, Heartland, Google, etc.).</p>
+                    <a href="#" target="_blank" class="project-link">View WooduTrade Module &rarr;</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="certificates">
+        <div class="container">
+            <h2>Certifications</h2>
+            <p style="color: var(--text-muted); margin-bottom: 40px;">Verifiable expertise in core technologies and development methodologies.</p>
+            <div class="cert-grid">
+                
+                <div class="cert-card">
+                    <h3>MEAN Stack Development</h3>
+                    <p>Training/Certification from [Placeholder Institute/Platform]</p>
+                </div>
+                
+                <div class="cert-card">
+                    <h3>AWS Cloud Practitioner</h3>
+                    <p>Certification/Training in Cloud Services</p>
+                </div>
+
+                <div class="cert-card">
+                    <h3>Agile/Scrum Methodology</h3>
+                    <p>Training in Project Management Techniques</p>
+                </div>
+
+                <div class="cert-card">
+                    <h3>JavaScript/TypeScript</h3>
+                    <p>Advanced Coding Skills Certificate</p>
+                </div>
+                
+            </div>
+            <p style="color: var(--text-muted); margin-top: 40px;">*Please replace the placeholder information above with the actual names, dates, and issuing bodies for your certificates.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 style="font-size: 3rem; margin-bottom: 30px;">Ready to Start a Project?</h2>
+            <p style="color: var(--text-muted); margin-bottom: 40px;">I am open for Senior Full-Stack Developer opportunities and new consultancy projects.</p>
+            
+            <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+                <a href="mailto:pritamtandan@gmail.com" class="contact-btn">
+                    <span>✉️ pritamtandan@gmail.com</span>
+                </a>
+                <a href="tel:9926130834" class="contact-btn">
+                    <span>📞 9926130834</span>
+                </a>
+            </div>
+            
+            <footer style="margin-top: 80px; color: #475569; font-size: 0.9rem;">
+                &copy; 2025 Pritam Kumar. Built with clean code.
+            </footer>
+        </div>
+    </section>
+
+</body>
+</html>
